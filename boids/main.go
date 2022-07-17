@@ -2,6 +2,7 @@ package main
 
 import (
 	"image/color"
+	"log"
 
 	"github.com/hajimehoshi/ebiten"
 )
@@ -19,7 +20,7 @@ var (
 
 type Game struct{}
 
-func (g *Game) Update() error {
+func (g Game) Update(screen *ebiten.Image) error {
 	return nil
 }
 
@@ -32,7 +33,7 @@ func (g *Game) Draw(screen *ebiten.Image) {
 	}
 }
 
-func (g *Game) Layout(_, _ int) (w, h int) {
+func (g Game) Layout(_, _ int) (w, h int) {
 	return screenWidth, screenHeight
 }
 
@@ -42,7 +43,7 @@ func main() {
 	}
 	ebiten.SetWindowSize(screenWidth*2, screenHeight*2)
 	ebiten.SetWindowTitle("Boids in a box")
-	if err := ebiten.RunGame(&Game{}); err != nil {
-		log.fatal(err)
+	if err := ebiten.RunGame(Game{}); err != nil {
+		log.Fatal()
 	}
 }

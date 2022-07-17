@@ -14,7 +14,12 @@ type Boid struct {
 func (b Boid) moveOne() {
 	b.position = b.position.Add(b.velocity)
 	next := b.position.Add(b.velocity)
-	if 
+	if next.x >= screenWidth || next.x < 0 {
+		b.velocity = Vector2d{-b.velocity.x, b.velocity.y}
+	}
+	if next.y >= screenHeight || next.y < 0 {
+		b.velocity = Vector2d{b.velocity.x, -b.velocity.y}
+	}
 }
 
 func (b *Boid) start() {
